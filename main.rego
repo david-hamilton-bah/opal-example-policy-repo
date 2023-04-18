@@ -1,4 +1,4 @@
-package app.main
+package main
 
 default allow = false
 

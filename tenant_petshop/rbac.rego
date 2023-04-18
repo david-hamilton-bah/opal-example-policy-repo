@@ -19,7 +19,7 @@
 
 package tenant_petshop.rbac
 
-# import data.utils
+import common.utils as commonUtils
 
 # By default, deny requests
 default allow = false
@@ -60,11 +60,7 @@ allow {
 
 # user_is_admin is true if...
 user_is_admin {
-	# for some `i`...
-	some i
-
-	# "admin" is the `i`-th element in the user->role mappings for the identified user.
-	data.tenant_petshop.users[input.user].roles[i] == "admin"
+	commonUtils.isAdmin(data.tenant_petshop.users[input.user])
 }
 
 # user_is_viewer is true if...
