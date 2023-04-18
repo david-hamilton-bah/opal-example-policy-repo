@@ -1,6 +1,6 @@
 # Role-based Access Control (RBAC)
 
-package app.rbac
+package main.rbac
 
 # import data.utils
 
