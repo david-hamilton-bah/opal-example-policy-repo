@@ -19,7 +19,7 @@
 
 package tenant_petshop.rbac
 
-import common.utils as commonUtils
+import data.common.utils as commonUtils
 
 # By default, deny requests
 default allow = false
