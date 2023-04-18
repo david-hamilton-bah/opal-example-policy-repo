@@ -17,7 +17,7 @@
 #	* Rego comparison to other systems: https://www.openpolicyagent.org/docs/latest/comparison-to-other-systems/
 #	* Rego Iteration: https://www.openpolicyagent.org/docs/latest/#iteration
 
-package app.rbac
+package tenant_petshop.rbac
 
 # import data.utils
 
@@ -54,7 +54,7 @@ allow {
 	input.type == permission.type
 
 	# unless user location is outside US
-	country := data.users[input.user].location.country
+	country := data.tenant_petshop.users[input.user].location.country
 	country == "US"
 }
 
@@ -64,7 +64,7 @@ user_is_admin {
 	some i
 
 	# "admin" is the `i`-th element in the user->role mappings for the identified user.
-	data.users[input.user].roles[i] == "admin"
+	data.tenant_petshop.users[input.user].roles[i] == "admin"
 }
 
 # user_is_viewer is true if...
@@ -73,7 +73,7 @@ user_is_viewer {
 	some i
 
 	# "viewer" is the `i`-th element in the user->role mappings for the identified user.
-	data.users[input.user].roles[i] == "viewer"
+	data.tenant_petshop.users[input.user].roles[i] == "viewer"
 }
 
 # user_is_guest is true if...
@@ -82,7 +82,7 @@ user_is_guest {
 	some i
 
 	# "guest" is the `i`-th element in the user->role mappings for the identified user.
-	data.users[input.user].roles[i] == "guest"
+	data.tenant_petshop.users[input.user].roles[i] == "guest"
 }
 
 
@@ -92,8 +92,8 @@ user_is_granted[permission] {
 	some i, j
 
 	# `role` assigned an element of the user_roles for this user...
-	role := data.users[input.user].roles[i]
+	role := data.tenant_petshop.users[input.user].roles[i]
 
 	# `permission` assigned a single permission from the permissions list for 'role'...
-	permission := data.role_permissions[role][j]
+	permission := data.tenant_petshop.role_permissions[role][j]
 }
